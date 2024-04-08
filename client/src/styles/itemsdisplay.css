@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .items-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align items at the bottom */
+    margin-top: auto; /* Push items to the bottom */
+  }
+  
+  .item-card {
+    text-align: center;
+    margin: 0 10px;
+  }
+  
+  .item-card .item-image {
+    width: 100px; /* Set a fixed width for the images */
+    height: 100px; /* Set a fixed height for the images */
+    object-fit: cover; /* Ensure the images maintain their aspect ratio */
+  }
+  
+  

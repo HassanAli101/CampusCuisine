@@ -1,0 +1,85 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"); */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: url("lums_background.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(243, 243, 245, 0.3),
+    rgba(252, 252, 253, 0.3)
+  );
+  z-index: -1;
+}
+.form-container {
+  margin-top: 50px; /* Adjust this value based on your navbar height */
+}
+
+.table-container {
+  overflow-y: auto;
+  max-height: calc(100vh - 150px); /* Adjust this value based on your navbar and other layout heights */
+}
+.sub-button-Home {
+  margin-top: 10px;
+  width: 48%;
+  height: 50px;
+  background-color: #fff;
+  outline: none;
+  border: solid #fff;
+  border-radius: 40px;
+  font-size: 16px;
+  color: #000;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 1px;
+  font-weight: bold;
+}
+
+::placeholder {
+  color: #fff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(0, 93, 233, 0.5);
+}
+
+.table th,
+.table td {
+  border: none;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: rgba(12, 18, 215, 0.5);
+}
+.checkbox-label {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  transform: scale(0.8);
+}

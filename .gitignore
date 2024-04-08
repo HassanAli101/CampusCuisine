@@ -1,0 +1,6 @@
+# Add files here to be ignored by Git
+client/node_modules/
+server/node_modules/
+node_modules/
+server/.env
+```

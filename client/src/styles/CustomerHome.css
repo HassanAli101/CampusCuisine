@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  flex: 1;
+  background: url("./lums_background.png") no-repeat center center;
+  background-size: cover;
+}
+
+.maindiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; /* Reduce padding to decrease vertical space */
+  width: 100vw; /* Set width to 100% of viewport width */
+  height: 100vh; /* Set height to 100% of viewport height */
+}
+
+nav {
+  margin-bottom: 10px; /* Reduce margin to decrease vertical space */
+}
+
+form {
+  width: 70%; /* Set the form width to 70% of the parent container (.maindiv) */
+  display: flex; /* Use flexbox */
+}
+
+input[type="text"] {
+  flex: 1; /* Let the input take remaining space */
+  padding: 10px; /* Optional: Add padding for better appearance */
+}
+
+.SearchButton {
+  margin-left: 10px; /* Optional: Add margin between input and button */
+  height: 40px; /* Optional: Set the button height */
+  background-color: #fff;
+  outline: none;
+  border: solid #fff;
+  border-radius: 40px;
+  font-size: 14px;
+  color: #000;
+}
+
+h3.title {
+  text-align: left; /* Align the title to the left */
+  margin-top: 1px;
+  font-weight: bold;
+}
+
+/* Style for items grid */
+.items-container1 {
+  display: flex; /* Change display to flex */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 20px; 
+  margin-top: 20px;
+  padding-bottom: 20px; /* Optional: Add padding to the bottom */
+  width: calc(100% - 40px); /* Adjust width to accommodate gap */
+
+}
+
+/* Hide the scrollbar */
+.items-container1::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Webkit (Chrome, Safari, etc.) */
+}
+
+/* Style for each item card */
+.item-card1 {
+  background-color: #b9b9c5; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  flex: 0 0 auto; /* Allow items to shrink and grow */
+  width: 150px; /* Adjust width of item boxes */
+}
+
+/* Style for item image */
+.item-image1 {
+  max-width: 90%; /* Ensures image doesn't exceed its container */
+  height: 70%; /* Ensures square dimensions */
+  object-fit: cover; /* Ensures the image covers the entire container */
+  border-radius: 80px; /* Rounds the corners of the image */
+}
+
+p {
+  color: #fff; /* Set text color to white */
+  font-size: 9px; /* Set font size to 14px */
+}
+
