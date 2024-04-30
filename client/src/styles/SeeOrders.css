@@ -14,9 +14,11 @@ body {
   height: 100vh;
   margin: 0;
   position: relative;
+  background-attachment: fixed;
+  /* opacity: 0.5; */
 }
 
-body::before {
+/* body::before {
   content: "";
   position: absolute;
   top: 0;
@@ -24,15 +26,22 @@ body::before {
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    rgba(243, 243, 245, 0.3),
-    rgba(252, 252, 253, 0.3)
+    rgba(243, 243, 245, 0.7),
+    rgba(252, 252, 253, 0.7)
   );
   z-index: -1;
-}
+  background-attachment: fixed;
+} */
+
+
 .form-container {
   margin-top: 50px; /* Adjust this value based on your navbar height */
 }
-
+.error-message {
+  font-size: 18px; /* Adjust the font size as needed */
+  color: red; /* Optional: Change the color of the error message */
+  background-color: #fff;
+}
 .table-container {
   overflow-y: auto;
   max-height: calc(100vh - 150px); /* Adjust this value based on your navbar and other layout heights */
@@ -82,4 +91,14 @@ h1 {
 
 input[type="checkbox"] {
   transform: scale(0.8);
+}
+.table-container {
+  max-height: 200px; /* Maximum height of the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow: scroll;
 }

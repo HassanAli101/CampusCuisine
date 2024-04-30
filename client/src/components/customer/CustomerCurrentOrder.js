@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const CustomerCurrentOrder = () => {
   const [orders, setOrders] = useState([]);
-  const CustomerEmail = window.localStorage.getItem('CustomerEmail');
+  const CustomerEmail = window.sessionStorage.getItem('email');
   const fetchOrders = async () => {
     try {
       // Fetch orders from your backend API

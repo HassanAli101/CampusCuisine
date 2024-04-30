@@ -1,9 +1,15 @@
 /* Resetting default margin and padding */
 .profile-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; /* Reduce padding to decrease vertical space */
+  width: 100vw; /* Set width to 100% of viewport width */
+  height: 100vh; /* Set height to 100% of viewport height */
+  background: rgba(255, 255, 255, 0.7);
+  
+}
   
   .profile-header {
     display: flex;
@@ -64,5 +70,9 @@
   .card p {
     font-size: 16px;
     margin-top: 5px;
+  }
+
+  h2 {
+    color: #285A84;
   }
   

@@ -1,54 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&display=swap');
 .login-container {
   display: flex;
   width: 100vw;
   height: 100vh;
+  /* position: fixed; */
 }
 
 .login-left {
-  flex: 1;
-  background: url("./lums_background.png") no-repeat center center;
-  background-size: cover;
+  width: 55%; 
+  height: auto;
+  background-image: url("./lums_background.jpg");
+  background-size: cover; /* Fill the entire background area */
+  background-repeat: no-repeat;
+
 }
 
 .login-right {
   flex: 1;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
   background-color: white;
+  position: relative;
 }
 
 .login-title {
-  font-size: 24px;
+  font-size: 40px;
   color: black;
   margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  position: absolute;
+  left: 30px;
+  top: 225px;
 }
 
 .login-logo {
-  width: 150px;
-  height: auto;
+  width: 400px;
+  height: 400px;
   margin-bottom: 20px;
+  bottom: 325px;
+  /* right: 0px; */
+  left: 120px;
+  position: absolute;
 }
 
-.login-input {
+.login-email-input {
   width: 80%;
   padding: 10px;
   margin-bottom: 10px;
   color: black;
-  border: 1px solid #ccc;
+  border: 1px solid #5f5f5f;
   border-radius: 5px;
   background-color: #f9f9f9;
+  position: absolute;
+  bottom: 275px;
 }
 
-.login-input::placeholder {
+.login-password-input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
   color: black;
+  border: 1px solid #5f5f5f;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  position: absolute;
+  bottom: 200px;
+}
+
+.login-email-input::placeholder {
+  color: rgb(0, 0, 0);
+  opacity: 1;
+}
+
+.login-password-input::placeholder {
+  color: rgb(0, 0, 0);
   opacity: 1;
 }
 
 .login-button {
-  width: 85%;
+  width: 82%;
   padding: 10px;
   background-color: darkblue;
   color: white;
@@ -57,10 +91,27 @@
   border-radius: 5px;
   margin-top: 20px;
   margin-bottom: 20px;
+  position: absolute;
+  bottom: 110px;
+}
+
+.login-button:hover {
+  color: white;
+  background: rgb(28, 0, 79);
 }
 
 .signup-redirect {
   color: darkblue;
   text-decoration: underline;
   cursor: pointer;
+  position: absolute;
+  bottom: 90px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 420px; /* Adjust the margin-top to move the message down */
+  font-family: 'Inter', sans-serif; /* Change font family */
+  padding-left: 5px;
+  font-size: 10px;
 }

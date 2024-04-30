@@ -23,7 +23,7 @@ const CustomerReview = (props) => {
     }
 
     // get the customer email from local storage, learnt from https://www.youtube.com/watch?v=A98SPz5XLwY
-    const customer_email = window.localStorage.getItem('CustomerEmail');
+    const customer_email = window.sessionStorage.getItem('email');
     console.log("customer_email", customer_email); 
 
     try {
@@ -86,7 +86,7 @@ const CustomerReview = (props) => {
     // using onsubmit to call handlereview when form submitted (i.e when the submit button is clicked)
     //using onchange to call the respective set function when the input value changes
     // using validate rating to ensure the rating is not greater than 5
-    <div className="review">
+    <div className='maindiv'>
       <h1 >
         Review your vendor
       </h1>
@@ -94,8 +94,8 @@ const CustomerReview = (props) => {
       <form className="form" onSubmit={handleReview}> 
         <div>
           <input
-            className="user-inp"
-            type="text"
+            className="user-inpCR"
+            type="textarea"
             placeholder="Vendor Email"
             value={vendor_email}
             onChange={(e) => setVendor(e.target.value)}
@@ -103,8 +103,8 @@ const CustomerReview = (props) => {
         </div>
         <div>
           <input
-            className="user-inp"
-            type="text"
+            className="user-inpCR"
+            type="textarea"
             placeholder="Description"
             value={comment}
             onChange={(e) => setDescription(e.target.value)}
@@ -112,7 +112,7 @@ const CustomerReview = (props) => {
         </div>
         <div>
           <input
-            className="user-inp"
+            className="user-inpCR"
             type="number"
             placeholder="Rating /5"
             value={rating}

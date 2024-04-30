@@ -1,86 +1,267 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background: linear-gradient(90deg, #fb37ff, #18b2de);
-}
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap");
 
 .container {
-  width: 1200px;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 20px; */
+  /* position: relative; */
+  /*top: 100px; */
 }
 
-.sub-button-Home {
-  margin-top: 10px;
-  width: 48%;
+.grey-tape {
+  background-color: rgb(111, 111, 111, 0.5); /* Set background color to black */
+  color: white; /* Set text color to white */
+  padding: 10px 20px;
+  position: absolute;
+  width: 1370px;
+  left: 0px;
+}
+
+.popular-sellers-title {
+  font-family: 'Kadwa', serif;
+  margin: 0;
+  height: 20px;
+  position: relative;
+  bottom: 8px;
+  right: 500px;
+  font-weight: 550;
+  font-size: 24px;
+}
+
+.most-popular-sellers {
+  position: relative;
+  width: 45%;
+  right: 450px;
+  bottom: 180px;
+  width: 450px;
+  height: 80px;
+  /* transform: scale(0.9); */
+}
+
+.vendor-card {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px; 
+  height: 85px;
+  width: 250px;
+  top: 50px;
+}
+
+.vendor-price-range {
+  color: black; /* Change text color to black */
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
+  font-weight: 600;
+  position: relative;
+}
+
+.vendor-average-rating {
+  position: absolute; /* Make the rating position absolute */
+  bottom: 20px; /* Adjust the distance from the bottom */
+  right: 25px; /* Position the rating to the right */
+  color: black; /* Change text color to black */
+  font-family: 'Inter', sans-serif; /* Apply Inter font */
+  font-weight: 600;
+}
+
+.star-logo-2 {
+  background-image: url('star.png');
+  background-size: cover; /* Ensure the star logo covers the div */
+  display: inline-block; /* Make the div inline-block to appear next to the rating */
+  vertical-align: middle; /* Align the div vertically with the text */
+  position: absolute;
+  top: 55px;
+  right: 16px;
+  width: 9px;
+  height: 9px;
+}
+
+.dollar-logo {
+  background-image: url('dollar.png');
+  background-size: cover; 
+  display: inline-block; /* Make the div inline-block to appear next to the rating */
+  vertical-align: middle; /* Align the div vertically with the text */
+  position: relative;
+  width: 9px;
+  height: 9px;
+  top: 0px;
+  right: 2px;
+}
+
+.vendor-name {
+  color: red;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.pie-chart {
+  /* width: 30%; */
+  position: absolute;
+  right: 80px;
+  top: 100px;
+  width: 500px;
   height: 50px;
-  background-color: #fff;
-  outline: none;
-  border: solid #fff;
-  border-radius: 40px;
-  font-size: 16px;
-  color: #000;
 }
 
-h1 {
-  text-align: center;
-  margin-top: 1px;
-  font-weight: bold;
+.pie-chart-diagram {
+
+  width:100%;
+  height:auto;
+  
 }
 
-.section {
-  margin-bottom: 20px;
+.customer-reviews {
+  width: 100%;
+  position: absolute;
+  top: 435px;
+  left: 20px;
+  width: 500px;
+  height: 200px;
 }
 
-.reviews-list {
+.title {
+  font-family: 'Kadwa', serif;
+}
+
+.pie-chart-title {
+  font-family: 'Kadwa', serif;
+  color:black;
+}
+
+.review-title {
+  font-family: 'Kadwa', serif;
+  margin: 0;
+  height: 20px;
+  position: relative;
+  bottom: 8px;
+  right: 0px;
+  font-weight: 550;
+  font-size: 24px;
+}
+
+.second-grey-tape {
+  background-color: rgb(111, 111, 111, 0.5); /* Set background color to black */
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  position: relative;
+  width: 500px;
+  left: 0px;
+}
+
+.review-list-container {
+  overflow-x: hidden; /* Hide the default scrollbar */
+  overflow-y: hidden; /* Hide the vertical scrollbar */
+  white-space: nowrap;
+  position: relative;
+}
+
+.review-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  /* Additional styling for list items */
 }
 
-.review-item {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-/* Add styles for the pie chart */
-.chart-container {
+.review-list li {
+  background-color: rgb(255, 255, 255, 0.8);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 15px;
+  height: 85px;
+  width: 400px;
+  display: inline-block; /* Display list items inline */
   position: relative;
-  width: 80%; /* Adjust the width as needed */
-  margin: auto;
-}
-
-/* Customize the appearance of the chart legend */
-.chart-legend {
-  list-style: none;
-  display: flex;
-  justify-content: center;
+  /* list-style-type: none;
   padding: 0;
+  margin: 0; */
 }
 
-.chart-legend-item {
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
+
+.vendor-review-name {
+  color: black;
+  font-family: 'Kadwa';
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.chart-legend-color {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
+.vendor-review-rating {
+  color: black;
+  font-family: 'Inter';
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  right: 50px;
+  top: 25px;
 }
 
-.chart-legend-label {
-  font-size: 14px;
+.star-logo {
+  width: 20px; /* Adjust the size of the star logo as needed */
+  height: 20px; /* Adjust the size of the star logo as needed */
+  background-image: url('star.png');
+  background-size: cover; /* Ensure the star logo covers the div */
+  display: inline-block; /* Make the div inline-block to appear next to the rating */
+  vertical-align: middle; /* Align the div vertically with the text */
+  position: absolute;
+  top: 26px;
+  right: 30px;
 }
-.customer-reviews {
-  overflow-x: auto;
-  white-space: nowrap;
-  max-width: 100%;
-  margin-bottom: 20px;
+
+.vendor-review-comment {
+  color: black;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 450;
+}
+
+
+.scroll-button-left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  left: 0; /* Adjust left position */
+}
+
+.scroll-button-left:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.scroll-button-left:focus {
+  outline: none;
+}
+
+.scroll-button-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  right: 0; /* Adjust right position */
+}
+
+.scroll-button-right:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.scroll-button-right:focus {
+  outline: none;
 }

@@ -1,48 +1,38 @@
-/*Shehbaz*/
-/*ChatGPT for template*/
+.container4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Reduce padding to decrease vertical space */
+    width: 100vw; /* Set width to 100% of viewport width */
+    height: 100vh; /* Set height to 100% of viewport height */
+    background: rgba(255, 255, 255, 0.7);
+    
+  }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #6495ED; 
-    color: #fff; 
+.review-container {
+    height: 300px; /* Set desired height */
+    width: 600px;
+    overflow-y: scroll;
+    background-color: rgba(0, 93, 233, 0.5);
+
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+.review-container::-webkit-scrollbar {
+    display: none;
 }
 
-h1 {
-    text-align: center;
+
+.containerh1 ,
+.container p {
+    color: black;
 }
 
-button {
-    background-color: #fff; 
-    color: #6495ED; 
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
+.review-container ,
+.container p {
+    color: black;
 }
 
-button:hover {
-    background-color: #f0f0f0; 
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 10px;
-    background-color: #1d18bb ;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-strong {
-    color: #fff; 
+.no-reviews {
+    font-size: 18px;
 }

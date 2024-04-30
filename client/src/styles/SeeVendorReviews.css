@@ -1,0 +1,129 @@
+.see-vendor-reviews-container {
+
+}
+
+.fixed-tint {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.85); /* Adjust opacity here */
+}
+
+.input-container {
+  position: relative;
+}
+
+
+input[type="text"] {
+  /* Remove absolute positioning */
+  width: 400px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+  line-height: 20px;
+  /* Remove absolute positioning */
+  /* position: absolute;
+  bottom: 170px;
+  right: 280px; */
+  height: 40px !important;
+}
+
+.search-vendor-rating-button {
+  /* Basic button styles */
+  background-color: #285A84; /* Green */
+  border: none;
+  color: white;
+  padding: 9px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+
+  /* Hover effect */
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+.search-vendor-rating-button:hover {
+  background-color: #1d1252; /* Darker green */
+}
+
+/* Optional: Increase contrast for accessibility */
+.search-vendor-rating-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 79, 163, 0.5); /* Example blue shadow */
+}
+
+.review-list-container-2 {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+}
+
+.review-list-2 {
+  list-style-type: none;
+  padding: 20px;
+  margin: 0;
+  z-index: 2;
+  /* Additional styling for list items */
+}
+
+.review-list-2 li {
+  background-color: rgb(255, 255, 255, 0.8);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 15px;
+  height: 200px;
+  width: 400px;
+  display: inline-block; /* Display list items inline */
+  position: relative;
+  /* z-index: 2; */
+  /* list-style-type: none;
+  padding: 0;
+  margin: 0; */
+}
+
+
+.vendor-review-name-2 {
+  color: black;
+  font-family: 'Kadwa';
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.vendor-review-rating-2 {
+  color: black;
+  font-family: 'Inter';
+  font-size: 20px;
+  font-weight: 600;
+  position: absolute;
+  right: 50px;
+  top: 25px;
+}
+
+.star-logo-2 {
+  width: 20px; /* Adjust the size of the star logo as needed */
+  height: 20px; /* Adjust the size of the star logo as needed */
+  background-image: url('star.png');
+  background-size: cover; /* Ensure the star logo covers the div */
+  display: inline-block; /* Make the div inline-block to appear next to the rating */
+  vertical-align: middle; /* Align the div vertically with the text */
+  position: absolute;
+  top: 26px;
+  right: 30px;
+}
+
+.vendor-review-comment-2 {
+  color: black;
+  font-family: 'Inter';
+  font-size: 12px;
+  font-weight: 450;
+}

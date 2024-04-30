@@ -1,83 +1,68 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import '../../styles/SeeVendorRequests.css';
+// import zIndex from "@mui/material/styles/zIndex";
 
 const SeeVendorRequests = () => {
-  const [vendorRequests, setVendorRequests] = useState([]);
-  const [courierRequests, setCourierRequests] = useState([]);
+  const [allRequests, setAllRequests] = useState([]);
 
   const seeRequests = async () => {
     try {
-      const my_requests = await axios.get("http://localhost:3001/view-join-requests");
-      console.log("Requests: ", my_requests)
-      const allUsers = my_requests.data.allUsers;
+      const myRequests = await axios.get("http://localhost:3001/view-join-requests");
+      const allUsers = myRequests.data.allUsers;
 
-      // Filter requests based on user type
       const vendorReqs = allUsers.filter(user => user.userType === 'vendor' || user.userType === 'studentVendor');
       const courierReqs = allUsers.filter(user => user.userType === 'courier');
 
-      setVendorRequests(vendorReqs);
-      setCourierRequests(courierReqs);
+      const combinedRequests = [...vendorReqs, ...courierReqs].map(request => ({ ...request, type: request.userType === 'vendor' || request.userType === 'studentVendor' ? 'Vendor' : 'Courier' }));
+      setAllRequests(combinedRequests);
     } catch (err) {
       console.log("Error while querying for requests:", err);
     }
   };
 
   useEffect(() => {
-    // Call seeRequests initially and then every 5 seconds
     seeRequests();
-
     const interval = setInterval(() => {
       seeRequests();
     }, 5000); // 5 seconds
-
-    // Clear the interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
   const handleDecision = async (userEmail, decision) => {
     try {
-      // console.log("Email: ", userEmail)
       await axios.post("http://localhost:3001/application-decision", {
         userEmail,
         decision
       });
-      // Remove the request from the UI
-      setVendorRequests(prevRequests => prevRequests.filter(user => user.email !== userEmail));
-      setCourierRequests(prevRequests => prevRequests.filter(user => user.email !== userEmail)); // Remove from courier requests if it exists
+      setAllRequests(prevRequests => prevRequests.filter(user => user.email !== userEmail));
     } catch (err) {
       console.log("Error while sending application decision:", err);
     }
   };
 
   return (
-    <div>
-      <h1>See Requests</h1>
-
-      {/* Vendor Requests */}
-      <h2>Vendor Requests</h2>
-      {vendorRequests.map((vendor, index) => (
-        <div key={index}>
-          <p>Vendor Email: {vendor.email}</p>
-          <p>Vendor Name: {vendor.name}</p>
-          {/* Render Approve and Decline buttons */}
-          <button onClick={() => handleDecision(vendor.email, "approve")}>Approve</button>
-          <button onClick={() => handleDecision(vendor.email, "decline")}>Decline</button>
-        </div>
-      ))}
-
-      {/* Courier Requests */}
-      <h2>Courier Requests</h2>
-      {courierRequests.map((courier, index) => (
-        <div key={index}>
-          <p>Courier Email: {courier.email}</p>
-          <p>Courier Name: {courier.name}</p>
-          {/* Render Approve and Decline buttons */}
-          <button onClick={() => handleDecision(courier.email, "approve")}>Approve</button>
-          <button onClick={() => handleDecision(courier.email, "decline")}>Decline</button>
-        </div>
-      ))}
+    <div className='see-vendor-requests-container'>
+      {allRequests.length > 0 ? (
+        allRequests.map((request, index) => (
+          <div className="request-card" key={index} style={{ flex: '0 0 calc(50% - 20px)', backgroundColor: '#fff', padding: '20px', borderRadius: '10px', boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.2)', marginBottom: '20px' }}>
+            <h3>{request.name}</h3>
+            <p>Type: {request.type}</p>
+            <p>Phone Number: {request.phone_Number}</p>
+            <div style={{ marginTop: '10px' }}>
+              <button className="approve-button" onClick={() => handleDecision(request.email, "approve")} style={{ padding: '10px 20px', marginRight: '10px', backgroundColor: '#0056b3', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Approve</button>
+              <button className="decline-button" onClick={() => handleDecision(request.email, "decline")} style={{ padding: '10px 20px', backgroundColor: '#d9534f', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Decline</button>
+            </div>
+          </div>
+        ))
+      ) : (
+        <h1 className="no-requests-message">No current requests</h1>
+      )}
     </div>
   );
+  
+  
+  
 };
 
 export default SeeVendorRequests;

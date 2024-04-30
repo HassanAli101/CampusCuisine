@@ -1,6 +1,24 @@
 /*Shehbaz*/
 /*ChatGPT for template*/
 /* Define grid container */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  color:#000;
+}
+
+body {
+  flex: 1;
+  background: url("../lums_background-2.png") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background: rgba(255, 255, 255, 0.7);
+  /* opacity: 0.5; */
+}
+
 .grid-container {
   display: grid;
   grid-template-rows: auto 1fr; 
@@ -17,12 +35,11 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 items per row */
   gap: 20px; 
-  margin-top: 600px
 }
 
 /* Style for each item card */
 .item-card {
-  background-color: #3a3c9a; 
+  background-color: #d2d2d2; 
   padding: 20px; 
   border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
@@ -35,3 +52,14 @@
   object-fit: cover; /* Ensures the image covers the entire container */
 }
 
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; /* Reduce padding to decrease vertical space */
+  width: 100vw; /* Set width to 100% of viewport width */
+  height: 100vh; /* Set height to 100% of viewport height */
+  background: rgba(255, 255, 255, 0.7);
+  
+}

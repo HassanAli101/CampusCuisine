@@ -4,12 +4,15 @@
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+  color:#000;
 }
 
 body {
   flex: 1;
   background: url("./lums_background.png") no-repeat center center;
   background-size: cover;
+  background-attachment: fixed;
+  /* opacity: 0.5; */
 }
 
 .maindiv {
@@ -20,37 +23,59 @@ body {
   padding: 10px; /* Reduce padding to decrease vertical space */
   width: 100vw; /* Set width to 100% of viewport width */
   height: 100vh; /* Set height to 100% of viewport height */
+  background: rgba(255, 255, 255, 0.7);
 }
 
 nav {
   margin-bottom: 10px; /* Reduce margin to decrease vertical space */
 }
 
-form {
-  width: 70%; /* Set the form width to 70% of the parent container (.maindiv) */
-  display: flex; /* Use flexbox */
+/* form {
+  width: 70%; /* Set the form width to 70% of the parent container (.maindiv) 
+  display: flex; /* Use flexbox 
 }
 
 input[type="text"] {
-  flex: 1; /* Let the input take remaining space */
-  padding: 10px; /* Optional: Add padding for better appearance */
-}
+  flex: 1; /* Let the input take remaining space 
+  padding: 10px; /* Optional: Add padding for better appearance 
+} */
 
 .SearchButton {
-  margin-left: 10px; /* Optional: Add margin between input and button */
-  height: 40px; /* Optional: Set the button height */
-  background-color: #fff;
+  position: absolute;
+  top: 18%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  min-width: 70px;
+  min-height: 40px;
+  background-color: #878787;
   outline: none;
-  border: solid #fff;
+  border: #fff;
   border-radius: 40px;
   font-size: 14px;
   color: #000;
 }
 
+.SearchBar1 {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 60%;
+  border-radius: 20px;
+  background-color: transparent  !important; ;
+  color: rgb(84, 83, 83);
+}
+
+.SearchBar1::placeholder {
+  color: rgb(84, 83, 83);
+}
+
+
 h3.title {
   text-align: left; /* Align the title to the left */
   margin-top: 1px;
   font-weight: bold;
+  background-color: #82f1a3;
 }
 
 /* Style for items grid */
@@ -71,24 +96,120 @@ h3.title {
 
 /* Style for each item card */
 .item-card1 {
-  background-color: #b9b9c5; 
-  padding: 20px; 
+  background-color: #f1f1f1; 
+  padding: 10px; 
   border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   flex: 0 0 auto; /* Allow items to shrink and grow */
   width: 150px; /* Adjust width of item boxes */
+  height: 150px;
+  color:#000
 }
 
 /* Style for item image */
 .item-image1 {
-  max-width: 90%; /* Ensures image doesn't exceed its container */
-  height: 70%; /* Ensures square dimensions */
+  width: 40%; /* Ensures image doesn't exceed its container */
+  height: 40%; /* Ensures square dimensions */
   object-fit: cover; /* Ensures the image covers the entire container */
   border-radius: 80px; /* Rounds the corners of the image */
+  align-items: center;
+
 }
 
 p {
-  color: #fff; /* Set text color to white */
+  color: #000000; /* Set text color to white */
   font-size: 9px; /* Set font size to 14px */
 }
 
+.BottomCH {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Optional: Align items horizontally at the center */
+  align-items: center; /* Optional: Align items vertically at the center */
+}
+
+.BottomerCH {
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Optional: Align items horizontally at the center */
+  align-items: center; /* Optional: Align items vertically at the center */
+}
+
+.items-containerRO {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  width: calc(100% - 40px);
+}
+
+.item-cardRO {
+  position: relative;
+  cursor: pointer;
+  width: 130px; /* Set initial width */
+  height: 40px; /* Set initial height */
+  background-color: #ffffff; /* Set initial background color */
+  border-radius: 8px;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease; /* Add transition */
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.item-details {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.item-cardRO:hover .item-details {
+  display: block;
+  width: 150px; /* Set width to match initial width */
+  height: 150px; /* Set height to match initial height */
+}
+
+.item-cardRO:hover .order-again {
+  display: none; /* Hide "Order Again" on hover */
+  width: 0px;
+  height: 0px;
+}
+
+.item-cardRO:hover {
+  width: 150px; /* Set width to match initial width */
+  height: 150px; /* Set height to match initial height */
+  background-color: transparent; /* Remove background color */
+}
+
+.order-again {
+  display: block;
+  position: absolute; /* Position "Order Again" absolutely */
+  top: 0;
+  left: 0;
+}
+
+/* Hide the scrollbar */
+.items-containerRO::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Webkit (Chrome, Safari, etc.) */
+}
+
+.item-imageRO {
+  width: 100px;
+  height: auto;
+}
+
+h4 {
+  color: #285A84;
+}
+
+.order-again {
+  color: #285A84;
+  font-size: 20px;
+}

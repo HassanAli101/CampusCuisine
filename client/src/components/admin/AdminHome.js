@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "../../styles/CourierHome.css";
+import "../../styles/AdminHome.css";
 import axios from 'axios';
 import { Chart } from "react-google-charts";
-import { useNavigate } from 'react-router-dom';
 
 const AdminHome = () => {
-  const navigate = useNavigate();
   const [topVendors, setTopVendors] = useState([]);
   const [allVendors, setAllVendors] = useState([]);
   const [myCustomerReviews, setMyCustomerReviews] = useState([]);
@@ -19,7 +16,7 @@ const AdminHome = () => {
 
         let temp = vendorsInfo;
         // Sort the vendorsInfo array based on totalPriceOfItemsSold in descending order
-        temp.sort((a, b) => b.totalPriceOfItemsSold - a.totalPriceOfItemsSold);
+        temp.sort((a, b) => b.totalPriceOfItemsSold - a.totalPriceOfItemsSold).slice(0,2);
 
         // Set vendors state
         setTopVendors(temp);
@@ -33,84 +30,102 @@ const AdminHome = () => {
     fetchData();
   }, []);
 
-  const handleVendorReviewsClick = () => {
-    navigate('/seeVendorRatings')
-  }
-
-  const handleBanUserClick = () => {
-    navigate('/banUser')
-  }
-
-  const handleJoinRequests = () => {
-    navigate('/joinRequests')
-  }
-
   // Transform topVendors data into the format expected by Chart component
-  const chartData = topVendors.map(vendor => [vendor.name, vendor.orderCount]);
+  const chartData = allVendors.map(vendor => [vendor.name, vendor.orderCount]);
 
   const options = {
-    title: "Vendors Order Count",
+    title: "",
+    backgroundColor: 'transparent',
+    legend: {
+      textStyle: {
+        fontSize: 14,
+      },
+    },
+    width: 500,
+    height: 350,
   };
 
-  return (
-    <div className='container' style={{ maxWidth: "1200px", margin: "0 auto"}}>
-      {/* Navigation links */}
-      <div>
-      <h1>Admin Dashboard</h1>
-      <nav>
-        <Link className="sub-button-Home" to="/admin/seeVendorRatings" onClick={handleVendorReviewsClick}>
-          See Vendor Ratings
-        </Link>{" "}
-        <br />
-        <Link className="sub-button-Home" to="/admin/joinRequests" onClick={handleJoinRequests}>
-          View Join Requests
-        </Link>{" "}
-        <br />
-        <Link className="sub-button-Home" to="/admin/banUser" onClick={handleBanUserClick}>
-          Ban User
-        </Link>
-        <br />
-      </nav>
-      </div>
+  const scrollList = (direction) => {
+    
+    const container = document.getElementById('review-list');
+    
+    const scrollAmount = 600;
+  
+    if (direction === "left") {
+      container.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+      });
+    } else {
+      console.log("Scrolling right", container)
+      container.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+  
 
+  return (
+    // <div className="container">
+    <div className='admin-home-container'>
+      <div className='fixed-tint'></div>
       {/* Display top vendors */}
-      <div>
-        <h2>Top Vendors</h2>
-        <ul>
-          {topVendors?.map((vendor, index) => (
-            <li key={index}>
-              <p>Name: {vendor.name}</p>
-              <p>Price Range: ${vendor.minPrice} - ${vendor.maxPrice}</p>
-            </li>
-          ))}
-        </ul>
+      <div className="most-popular-sellers">
+        <div className="grey-tape">
+        <h1 className="popular-sellers-title">Most Popular Sellers:</h1>
+        </div>
+        {topVendors.map((vendor, index) => (
+          <div className="vendor-card" key={index}>
+            <p className="vendor-name">{vendor.name}</p>
+            <div className="price-range-container">
+              <p className="vendor-price-range">Price Range: {vendor.minPrice} - {vendor.maxPrice}
+              <div className="dollar-logo"></div>
+              </p>
+            </div>
+            <div className="review-rating-container-2">
+              <p className="vendor-average-rating">Rating: {Math.round(vendor.avgRating)}</p>
+              <div className="star-logo-2"></div>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Display pie chart */}
-      {/* <div>
-        <h2>Vendors Order Count</h2>
-        <Chart
+      <div className="pie-chart">
+        <h2 className="pie-chart-title">Number of Orders at Each Restaurant:</h2>
+        <Chart className="pie-chart-diagram"
           chartType="PieChart"
           data={[["Name", "Order Count"], ...chartData]} // Include header row
           options={options}
-          width={"100%"}
-          height={"400px"}
+          // width={"100%"}
+          // height={"400px"}
         />
-      </div> */}
+      </div>
 
       {/* Display reviews sidebar */}
-      {/* <div className='customer-reviews' style={{ overflowX: "auto", whiteSpace: "nowrap", maxWidth: "100%", marginBottom: "20px" }}>
-        <h2>Customer Reviews</h2>
-        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-          {myCustomerReviews.map((review, index) => (
-            <li key={index} style={{ display: "inline-block", margin: "0 10px" }}>
-              <p>Customer Email: {review.customer_email}</p>
-              <p>Rating: {review.rating}</p>
-              <p>Comment: {review.comment}</p>
-            </li>
-          ))}
-        </ul>
-      </div> */}
+      <div className='customer-reviews' style={{ overflowX: "auto", whiteSpace: "nowrap", width: "50%", height: "200px" }}>
+      <button className="scroll-button-left" onClick={() => scrollList("left")}>{"<"}</button>
+        <div className="second-grey-tape">
+          <h2 className="review-title">Most recent reviews:</h2>
+        </div>
+        <div className="review-list-container" id="review-list">
+          <ul className="review-list" >
+            {myCustomerReviews.map((review, index) => (
+              <li key={index}>
+                <p className="vendor-review-name">{review.vendor_name}</p>
+                <div className="review-rating-container">
+                  <p className="vendor-review-rating">{review.rating}</p>
+                  <div className="star-logo"></div> {/* This div will contain the star logo */}
+                </div>
+                <p className="vendor-review-comment">{review.comment}</p>
+              </li>
+            ))}
+          </ul>
+          
+        </div>
+        <button className="scroll-button-right" onClick={() => scrollList("right")}>{">"}</button>
+      </div>
     </div>
   );
 };

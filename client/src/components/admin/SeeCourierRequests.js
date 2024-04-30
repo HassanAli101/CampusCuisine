@@ -3,7 +3,7 @@ import React from "react";
 
 const SeeCourierRequests = () => {
   return (
-    <div>
+    <div className='maindiv'>
       <h1>Courier Requests</h1>
       {/* Placeholder content */}
       <p>No courier requests to display.</p>

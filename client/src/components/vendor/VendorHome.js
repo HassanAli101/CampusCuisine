@@ -9,9 +9,13 @@ const VendorHome = () => {
   const [isBanned, setIsBanned] = useState(false);
   const [banDescription, setBanDescription] = useState('');
   const [applicationStatus, setApplicationStatus] = useState('');
-  const email = window.localStorage.getItem('vendorEmail');
+  const email = window.sessionStorage.getItem('email');
 
   useEffect(() => {
+    if (applicationStatus === 'decline'){
+      alert("Your application has been declined.")
+      return;
+    }
     const fetchItems = async () => {
       try {
         const response = await axios.post('http://localhost:3001/showitems', { vendorEmail: email });
@@ -26,6 +30,7 @@ const VendorHome = () => {
         const response = await axios.post('http://localhost:3001/is-vendor-banned', { email });
         if (response.data.isBanned) {
           setIsBanned(true);
+          window.sessionStorage.setItem('status', 'banned')
           setBanDescription(response.data.banDescription);
         }
       } catch (error) {
@@ -37,12 +42,16 @@ const VendorHome = () => {
       try {
         const response = await axios.post('http://localhost:3001/is-application-approved', { email, user_role: 'vendor' });
         const status = response.data.decision;
-        if (status === 'approved') {
+        if (status === 'approve') {
           fetchItems();
-        } else if (status === 'declined') {
-          alert('Your application has been declined.');
+          window.sessionStorage.setItem('application', 'approve')
+        } else if (status === 'decline') {
+          // alert('Your application has been declined.');
+          window.sessionStorage.setItem('application', 'decline')
+          setApplicationStatus('declined')
         } else {
           setApplicationStatus('processing');
+          window.sessionStorage.setItem('application', 'processing')
         }
       } catch (error) {
         console.error('Error checking application status:', error);
@@ -52,8 +61,9 @@ const VendorHome = () => {
     // Initial calls to fetch items, check banned status, and application status
     const interval = setInterval(() => {
       checkBannedStatus();
+      
       checkApplicationStatus();
-    }, 5000);
+    }, 3000);
 
     // Cleanup function to clear interval
     return () => clearInterval(interval);
@@ -72,7 +82,7 @@ const VendorHome = () => {
   };
 
   return (
-    <div>
+    <div className="content-container"> {/* Add class to style */}
       {isBanned ? (
         <div>
           <h1>You have been banned!</h1>
@@ -83,9 +93,14 @@ const VendorHome = () => {
           <h1>Application Processing</h1>
           <p>Your application is currently being processed. Please wait for approval.</p>
         </div>
+      ) : applicationStatus === 'decline' ? (
+        <div>
+          <h1>Application Decision</h1>
+          <p>Your application has been denied. Better luck next time, champ!</p>
+        </div>
       ) : (
         <div>
-          <h1>Welcome,</h1>
+          <h1>Welcome</h1>
           <div className="items-container">
             {items.map(item => (
               <div key={item.itemId} className="item-card">

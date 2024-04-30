@@ -37,3 +37,13 @@
   font-weight: bold;
   color: #007bff;
 }
+.table-container {
+  max-height: 150px; /* Maximum height of the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow: scroll;
+}

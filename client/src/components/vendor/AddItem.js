@@ -5,8 +5,10 @@ import '../../styles/vendorCss/addItemCustom.css';
 
 const AddItem = () => {
   const navigate = useNavigate();
-  const vendorEmail = window.localStorage.getItem('vendorEmail');
+  const vendorEmail = window.sessionStorage.getItem('email');
   const [isBanned, setIsBanned] = useState(false);
+  const [applicationStatus, setApplicationStatus] = useState('');
+  const [banDescription, setBanDescription] = useState('');
 
   useEffect(() => {
     const checkBannedStatus = async () => {
@@ -15,19 +17,27 @@ const AddItem = () => {
         setIsBanned(response.data.isBanned);
         if (response.data.isBanned) {
           alert('You have been banned: ' + response.data.banDescription);
+          setBanDescription(response.data.banDescription)
         }
       } catch (error) {
         console.error('Error checking banned status:', error);
       }
     };
 
-    // Check banned status on component mount
-    checkBannedStatus();
+    const checkApplicationStatus = async () => {
+      try {
+        const response = await axios.post('http://localhost:3001/is-application-approved', { email: vendorEmail, user_role: 'vendor' });
+        setApplicationStatus(response.data.decision);
+      } catch (error) {
+        console.error('Error checking application status:', error);
+      }
+    };
 
-    // Set interval to check banned status every 10 seconds
+    // Set interval to check banned status and application status every 10 seconds
     const interval = setInterval(() => {
       checkBannedStatus();
-    }, 10000);
+      checkApplicationStatus();
+    }, 5000);
 
     // Clear interval on component unmount
     return () => clearInterval(interval);
@@ -101,74 +111,91 @@ const AddItem = () => {
 
   return (
     <div className="add-item-page">
-      <h1 className="add-item-header">ADD ITEM</h1>
-      <div className="partition"></div>
-      <form className="form" onSubmit={handleAddItem}>
-        {/* Input fields */}
+      {isBanned ? (
         <div>
-          <input
-            className="item-inp"
-            type="text"
-            placeholder="Item Name"
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
-          />
+          <h1>You have been banned!</h1>
+          <p>{banDescription}</p>
         </div>
-        {/* Other input fields */}
+      ) : applicationStatus === 'processing' ? (
         <div>
+          <h1>Application Processing</h1>
+          <p>Your application is currently being processed. Please wait for approval.</p>
+        </div>
+      ) : applicationStatus === 'decline' ? (
         <div>
-          <input
-            className="item-inp"
-            type="text"
-            placeholder="Category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
+          <h1>Application Decision</h1>
+          <p>Your application has been denied. Better luck next time, champ!</p>
         </div>
-        <div>
-          <input
-            className="item-inp"
-            type="number"
-            placeholder="Stock"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
-          />
-        </div>
-        <div>
-          <input
-            className="item-inp"
-            type="number"
-            placeholder="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-        <div>
-          <input
-            className="item-inp"
-            type="number"
-            placeholder="Calories"
-            value={calories}
-            onChange={(e) => setCalories(e.target.value)}
-          />
-        </div>
-        </div>
-        {/* Image upload field */}
-        <div>
-          <input
-            className="item-inp"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
-          {loading && <div className="loading-icon">Loading...</div>}
-        </div>
-        <div>
-          <button className="sub-button" type="submit" disabled={isBanned}>
-            {isBanned ? 'Banned: Cannot Add Item' : 'Add Item'}
-          </button>
-        </div>
-      </form>
+      ) : (
+        <>
+          <h1 className="add-item-header">ADD ITEM</h1>
+          <div className="partition"></div>
+          <form className="form" onSubmit={handleAddItem}>
+            {/* Input fields */}
+            <div>
+              <input
+                className="item-inp"
+                type="textarea"
+                placeholder="Item Name"
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
+              />
+            </div>
+            {/* Other input fields */}
+            <div>
+              <input
+                className="item-inp"
+                type="textarea"
+                placeholder="Category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                className="item-inp"
+                type="number"
+                placeholder="Stock"
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                className="item-inp"
+                type="number"
+                placeholder="Price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                className="item-inp"
+                type="number"
+                placeholder="Calories"
+                value={calories}
+                onChange={(e) => setCalories(e.target.value)}
+              />
+            </div>
+            {/* Image upload field */}
+            <div>
+              <input
+                className="item-inp"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+              {loading && <div className="loading-icon">Loading...</div>}
+            </div>
+            <div>
+              <button className="sub-button" type="submit" disabled={isBanned}>
+                {isBanned ? 'Banned: Cannot Add Item' : 'Add Item'}
+              </button>
+            </div>
+          </form>
+        </>
+      )}
     </div>
   );
 };

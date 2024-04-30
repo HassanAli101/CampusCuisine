@@ -10,7 +10,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #003366;
+  background-color: #285A84;
+  background: linear-gradient(to bottom, #285A84 30%, transparent 30%);
   padding: 10px 20px;
   color: white;
   width: 100%;
@@ -20,27 +21,40 @@ body {
   z-index: 1000;
 }
 
+.navbar-links button.active {
+  background-color: #285A84;
+  color: white;
+}
+
+.navbar-links button.settings-button.active {
+  background-color: #285A84;
+  color: rgb(255, 255, 255);
+}
+
 .navbar-logo img {
-  width: 50px;
+  width: 80px;
   height: auto;
 }
 
 .navbar-links {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
 
 .navbar-links button {
-  background-color: white;
-  color: #003366;
+  background-color: rgba(255, 255, 255, 0);
+  color: #285A84;
   border: none;
-  padding: 10px 15px;
+  padding: 15px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 12px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
 }
 
 .navbar-links button:hover {
-  background-color: #f2f2f2;
+  background-color: #00336623;
 }
 
 .settings-button {
@@ -48,7 +62,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: white;
-  color: #003366;
+  color: #285A84;
   padding: 10px;
   border: none;
   cursor: pointer;

@@ -7,7 +7,7 @@
 }
 
 body {
-  background: linear-gradient(90deg, #fb37ff, #18b2de);
+  background: url("./lums_background.png") no-repeat center center;
   color:#fff;
 }
 

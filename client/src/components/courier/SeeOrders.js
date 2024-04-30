@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const SeeOrders = () => {
+  const [errorMessage, setErrorMessage] = useState('');
   const [orders, setOrders] = useState([]);
 
   const handleStatusChange = async (orderId, newStatus) => {
@@ -18,6 +19,18 @@ const SeeOrders = () => {
       } else {
         if (window.confirm('Order Completed?')) {
           // If the user confirms, proceed with the status change
+          const courierEmail = getCourierEmail();
+
+          // Fetch the order details
+          const orderDetails = await axios.get(`http://localhost:3001/order/${orderId}`);
+
+          // Extract the email stored in the delivered_by attribute of the order
+          const orderCourierEmail = orderDetails.data.delivered_by;
+
+          // Verify if the courier's email matches the email stored in the delivered_by attribute
+          if (courierEmail !== orderCourierEmail) {
+            setErrorMessage('Unauthorized access: You are not authorized to update this order.');            return;
+          }
           updateOrderStatus(orderId, newStatus);
         }
       }
@@ -86,8 +99,9 @@ const SeeOrders = () => {
   }, []);
 
   return (
-    <div className="form-container">
+    <div className='maindiv'>
       <h2>Customer orders</h2>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="table-container">
         <table className="table">
           <thead>
@@ -99,34 +113,37 @@ const SeeOrders = () => {
               <th style={{ textAlign: 'center', padding: '15px' }}>Status</th>
             </tr>
           </thead>
-          <tbody>
+            <tbody>
             {orders.map((orderItem, index) => (
-              <tr key={index}>
-                <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.vendor}</td>
-                <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.vendor_addr}</td>
-                <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.client}</td>
-                <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.client_addr}</td>
-                <td style={{ textAlign: 'center', padding: '15px' }}>
-                  <button
-                    style={{
-                      backgroundColor:
-                        orderItem.status === 'New'
-                          ? 'red'
-                          : orderItem.status === 'InProgress'
-                          ? 'yellow'
-                          : 'green',
-                      color: 'Black',
-                      border: 'none',
-                      borderRadius: '10px',
-                      padding: '5px 10px',
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => handleStatusChange(orderItem._id, getNextStatus(orderItem.status))}
-                  >
-                    {orderItem.status}
-                  </button>
-                </td>
-              </tr>
+              // Render only if the order status is not "Completed"
+              orderItem.status !== 'Completed' && (
+                <tr key={index}>
+                  <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.vendor}</td>
+                  <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.vendor_addr}</td>
+                  <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.client}</td>
+                  <td style={{ textAlign: 'center', padding: '15px' }}>{orderItem.client_addr}</td>
+                  <td style={{ textAlign: 'center', padding: '15px' }}>
+                    <button
+                      style={{
+                        backgroundColor:
+                          orderItem.status === 'New'
+                            ? 'red'
+                            : orderItem.status === 'InProgress'
+                            ? 'yellow'
+                            : 'green',
+                        color: 'Black',
+                        border: 'none',
+                        borderRadius: '10px',
+                        padding: '5px 10px',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => handleStatusChange(orderItem._id, getNextStatus(orderItem.status))}
+                    >
+                      {orderItem.status}
+                    </button>
+                  </td>
+                </tr>
+              )
             ))}
           </tbody>
         </table>
