@@ -10,6 +10,10 @@ const CustomerReviewSchema = new Schema({
         type: String,
         required: false
     },
+    vendor_name: {
+        type: String,
+        required: false
+    },
     vendor_email: {
         type: String,
         required: false

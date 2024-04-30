@@ -29,6 +29,18 @@ const VendorsSchema = new Schema({
     application: {
         type: String,
         required: false, // Set to false for not required
+    },
+    address: {
+        type: String,
+        required: false, // Set to false for not required
+    },
+    cardPay: {
+        type: String,
+        required: false, // Set to false for not required
+    },
+    profileImage: {
+        type: String,
+        required: false, // Set to false for not required
     }
 },{timestamps: true})
 

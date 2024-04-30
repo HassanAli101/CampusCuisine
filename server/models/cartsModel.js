@@ -42,6 +42,10 @@ const cartsSchema = new Schema({
         type: String,
         required: false
     },
+    stock: {
+        type: Number,
+        required: false
+    }
 },{timestamps: true})
 
 const carts = mongoose.model('carts', cartsSchema);
